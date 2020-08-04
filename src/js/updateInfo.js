@@ -1,4 +1,4 @@
-/***** 
+/** ***
 加入 jattr jstyle jroot
 bug: 对于数组，若是没有绑定元素，则无法使用$push等方法
      对于数组，直接对数组赋值，ui不会改变
@@ -12,11 +12,11 @@ jui select 对绑定的选项进行$push 或其他操作，ui不变
 jdom获取样式有待改进
 jif jshow jattr jstyle 数组中不支持index
 jimg 的想法 已通过js修改图片的src解决
-
+ 
 2018
 1-25 修复了一个for的bug 没有包裹each时，元素的孩子和文字顺序会混乱
 2-1 新增了ondatachange；修复了 jif中attr的不能正确移除属性的bug
-2-3 新增jdom 
+2-3 新增jdom
 2-5 jrun jon 支持多个函数，支持js代码，jon支持绑定多个事件
 2-6 jload 修复了子模版使用父模版元素的bug
 2-6 可以越过作用域一级一级向上查找属性，不会直接报错
@@ -44,9 +44,9 @@ $remove 支持以元素为参数
 3-23 新增了 $r 获取根元素数据，修改了get方法
 JUI msg新增 hover参数 默认为true 鼠标移上时不会自动消失
 
-18 3-27 完善了ajax $ajax $ajax.get $ajax.post 
+18 3-27 完善了ajax $ajax $ajax.get $ajax.post
 j-icon font-size 初始值为 inherit
-修复了 for 的关于索引的 bug 
+修复了 for 的关于索引的 bug
 for 的直接孩子 bind元素现在可以正确的在属性中使用 $ 来代替其所绑定的数据 ,对数组操作进行了完善
 
 3-28 修复了jload和路由组件模式下 JUI绑定的bug 现在如果jui-bind的属性不在当前Jet元素的数据中，则会在子Jet元素中寻找，如果都没有则会忽略掉
@@ -68,7 +68,7 @@ for 的直接孩子 bind元素现在可以正确的在属性中使用 $ 来代�
 4-23 修复：数组的方法不会触发数组的监听回掉，现在使用数组的长度的绑定会被正确刷新
 4-24 新增 define，export，$get,import，module，，as 关键字
 4-24 新增css scoped 属性，默认值为true;
-    新增 JUI.dialog.isOpen clear ; 新增JUI.confirm.isOpen clear 
+    新增 JUI.dialog.isOpen clear ; 新增JUI.confirm.isOpen clear
     数组removeByIndex
     新增 new Jet()的name 参数
 5-14 完善js模块规范
@@ -103,10 +103,10 @@ for 的直接孩子 bind元素现在可以正确的在属性中使用 $ 来代�
  待增加：jui-bind 使用父元素或根元素数据**
 6-24 j-select 组件支持 数据绑定 j-option，
  当j-option过多时，支持上下滚动显示
- 修复了 j=‘’ 绑定数据且其数据处于上级作用域的元素，其子元素不会使用于其相同的作用域的bug 
+ 修复了 j=‘’ 绑定数据且其数据处于上级作用域的元素，其子元素不会使用于其相同的作用域的bug
  （*重要）现在可以对绑定数据的数组 使用 = 号直接赋值 ，不必使用 $replace; 也对json进行了优化，现在都可以使用 = 直接赋值
  6-26
-   修复数组插入数据 ，for中的input输入会错乱的bug 
+   修复数组插入数据 ，for中的input输入会错乱的bug
    修改了Jetterjs 的 insertArray(使用原生splice) removeByIndex(支持第二个参数选择删除个数)
    （*重要）修改了原生数组操作方法(push,pop,splice,shift,unshift,reverse,sort)，现在可以使用原生数组操作来操作Jet的绑定数组
    新增delay 和 interval 用于解决由于异步加载导致的依赖项未加载完成的情况，设置一个延迟或循环 获取依赖项
@@ -125,7 +125,7 @@ for 的直接孩子 bind元素现在可以正确的在属性中使用 $ 来代�
  现在jload不一定非要设置jpar属性，会将其所在的页面的Jet元素作为其父元素
 7-10 （*重要）将jcode融入了JUI ,新增了索引和点击某行高亮；jui-code-line 用于是否显示索引默认为true
  新增了jui-onload属性
-7-5:路由新增use参数新增oninit 用于在路由化之后调用，一般可以用来加载模块  
+7-5:路由新增use参数新增oninit 用于在路由化之后调用，一般可以用来加载模块
 
 //---表示与开发者无关
 10-30
@@ -141,11 +141,11 @@ for 的直接孩子 bind元素现在可以正确的在属性中使用 $ 来代�
  * 11-3
  * (*重要) 新增 jet tool(attr style if show) 中支持 $index 和 $index() 获取 索引
  * 使用 $index() 来替换 $.$p().$index
- * (*重要) 新增父子组件通信 传值  三种方式  
- *      :name='' 可以是父元素中的data或是一个js表达式 
+ * (*重要) 新增父子组件通信 传值  三种方式
+ *      :name='' 可以是父元素中的data或是一个js表达式
  *      ::name='' 同上 不同的是会将数据做一个深拷贝而不是直接引用
- *      @func='' 可以是父元素中的func或是一个js表达式 
-        当时js表达式时，需要使用 {} 包裹起来，否则会当成一个字符串处理 
+ *      @func='' 可以是父元素中的func或是一个js表达式
+        当时js表达式时，需要使用 {} 包裹起来，否则会当成一个字符串处理
         在js表达式中 this指代父元素，有两个参数 $和opt ，$指代作用域内的数据，opt指代如下
  *      opt={
           data:指代作用域内的数据,
@@ -160,7 +160,7 @@ for 的直接孩子 bind元素现在可以正确的在属性中使用 $ 来代�
     新增 media 目录
     新增 Jet.router.url 属性
     新增资源管理 Jet.res.define   Jet.res.getSrc  @
-    ---Jet.load.__loadStore   
+    ---Jet.load.__loadStore
     ---在load.init 回调中 init router
     ---现在 Jet组件都会有严格的父子组件关系、对应的ele 和 name（如没有定义就按照Jet规则默认命名）
     ---只存在一个默认绑定HTML标签的根root组件
@@ -171,7 +171,7 @@ for 的直接孩子 bind元素现在可以正确的在属性中使用 $ 来代�
 
   api jrouter&jout 新增jrouter-active说明
 
-  11-6 
+  11-6
   router onroute onrouted 新增一个bool参数，表示是初始化加载还是 页面无刷新的路由跳转
   route() 增加第二个参数 ，为路由跳转完成的回调函数
   11-7 jui 新增 progress，并且slider和progress都支持了颜色、大小，slider支持了disabled
@@ -180,14 +180,14 @@ for 的直接孩子 bind元素现在可以正确的在属性中使用 $ 来代�
     Jet.router.setBase
     static 参数
     新增生命周期 beforeunmount onunmounted 目前仅对路由组件和其子组件有效
-  11-13 
+  11-13
     data中 新增立即执行函数
     static 参数 支持立即执行函数
     Jet.router.indexMap 属性，保存路由首页对应的html地址 无需开发者设置
 
 jpath 是否使用jet的path机制，默认为true。如不使用，则默认使用以/src为根的绝对路径
   11-18
-    (*重要)拆分 Jet，使用Jet.use() 按需加载 
+    (*重要)拆分 Jet，使用Jet.use() 按需加载
         系统模块--['render-time','router', 'css-config', 'res', 'valid', 'lang', 'module','tool','jui']
       Jet.use.all() 加载全部预设依赖，回调函数参数为加载时间
     (*重要) 可以使用Jet.use() 加载外部依赖
@@ -198,7 +198,7 @@ jpath 是否使用jet的path机制，默认为true。如不使用，则默认使
 
   11-26
     (*重要) 完成jet 脚手架工具 jet-js-cli
-    (*重要) Jet.use.define*() 声明第三方库的模块和模块之间的依赖 
+    (*重要) Jet.use.define*() 声明第三方库的模块和模块之间的依赖
         module 和 rely 两个参数
   11-27
     (*重要) 新增 babel 和 less的支持，并加入了官方库，只要是 引入了babel或less，就自动将项目中的所有js或css文件进行相应的处理
@@ -208,7 +208,7 @@ jpath 是否使用jet的path机制，默认为true。如不使用，则默认使
     Jet.canUse() ,检测某个模块是否可用
     改进scoped属性
   11-30
-    修复一些有关scoped属性的bug 
+    修复一些有关scoped属性的bug
   12-6
     ondatachange 函数中的参数使用 json ,并新增 set方法和path属性。
     现在 参数有 key,value,index（这是一个记录索引的数组）,set（设置值）
