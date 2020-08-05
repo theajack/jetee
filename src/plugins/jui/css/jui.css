@@ -274,7 +274,7 @@ textarea.j-input{
     padding-left: 8px;
 }
 .j-input-w .j-input.xl{width:240px}
-.j-input[disabled],.j-select[disabled],.j-btn[disabled],.j-switch[disabled],.j-date[disabled],.j-color[disabled]{
+.j-input[disabled],.j-select[disabled] .j-select-vw,.j-btn[disabled],.j-switch[disabled],.j-date[disabled],.j-color[disabled]{
     cursor:no-drop!important;
     background-color: #ddd!important;
     color: #999!important;

@@ -5,6 +5,9 @@ module.exports = {
     "node": true,
     "commonjs": true
   },
+  "plugins": [
+    "html", //eslint-plugin-html插件
+  ],
   "parserOptions": {
     "parser": "babel-eslint",
     "ecmaVersion": 2018,
@@ -22,6 +25,8 @@ module.exports = {
   },
   "globals": {
     "window": true,
+    "Jet": true,
+    "JET": true
   },
   "rules": {
     "no-extend-native": 0,

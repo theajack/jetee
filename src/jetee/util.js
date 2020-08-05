@@ -445,43 +445,53 @@ export function _initCommonStyle () {
     })._JT_txt('.jet-hide{display:none!important}.jet-unpass{border-color:#f20!important;border-style:solid!important;background-color:rgba(255,0,0,.1)!important;color:red!important}'));
 }
 
-export function _jsonToString (json) {
-    let isArray = (json instanceof Array);
+export function _jsonToString (obj) {
+    let isArray = (obj instanceof Array);
     let str = isArray ? '[' : '{';
-    for (let k in json) {
-        let v = json[k];
-        let prefix = isArray ? '' : `"${k}":`;
-        if (v === null) {
-            str += `${prefix}null`;
-        } else if (typeof v === 'string') {
-            v = v.replace(/\n/g, '').replace(/"/g, '\\"');
-            str += `${prefix}"${v}"`;
-        } else if (typeof v === 'number' || typeof v === 'boolean') {
-            str += `${prefix}${v.toString()}`;
-        } else if (typeof v === 'undefined') {
-            str += `${prefix}undefined`;
-        } else if (typeof v === 'function') {
-            let funcs = window.Jet.__base__._funcs;
-            let id = window.Jet.__base__._funcs_id++;
-            funcs[id] = v;
-            str += `${prefix}window.Jet.__base__._funcs[${id}]`;
-
-            // let fstr = v.toString();
-            // if (fstr.indexOf('(') !== 0 && fstr.indexOf('function') !== 0) {
-            //     prefix = '';
-            // }
-            // str += `${prefix}${fstr}`;
-        } else if (typeof v === 'object') {
-            if (v.type === 'Jlang') {
-                str += `${prefix}new Jet.lang(${_jsonToString(v.data)})`;
-            } else {
-                str += `${prefix}${_jsonToString(v)}`;
-            }
+    if (isArray) {
+        for (let i = 0; i < obj.length; i++) {
+            str += _writeSingleString(obj[i]);
         }
-        str += ',';
+    } else {
+        for (let k in obj) {
+            str += _writeSingleString(obj[k], k);
+        }
     }
     if (str.length > 1) {
         str = str.substring(0, str.length - 1);
     }
     return str + (isArray ? ']' : '}');
+}
+
+function _writeSingleString (v, k) {
+    let prefix = typeof k === 'undefined' ? '' : `"${k}":`;
+    let str = '';
+    if (v === null) {
+        str = `${prefix}null`;
+    } else if (typeof v === 'string') {
+        v = v.replace(/\n/g, '').replace(/"/g, '\\"');
+        str = `${prefix}"${v}"`;
+    } else if (typeof v === 'number' || typeof v === 'boolean') {
+        str = `${prefix}${v.toString()}`;
+    } else if (typeof v === 'undefined') {
+        str = `${prefix}undefined`;
+    } else if (typeof v === 'function') {
+        let funcs = window.Jet.__base__._funcs;
+        let id = window.Jet.__base__._funcs_id++;
+        funcs[id] = v;
+        str = `${prefix}window.Jet.__base__._funcs[${id}]`;
+
+    // let fstr = v.toString();
+    // if (fstr.indexOf('(') !== 0 && fstr.indexOf('function') !== 0) {
+    //     prefix = '';
+    // }
+    // str += `${prefix}${fstr}`;
+    } else if (typeof v === 'object') {
+        if (v.type === 'Jlang') {
+            str = `${prefix}new Jet.lang(${_jsonToString(v.data)})`;
+        } else {
+            str = `${prefix}${_jsonToString(v)}`;
+        }
+    }
+    return str + ',';
 }

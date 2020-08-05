@@ -6,6 +6,7 @@ import {
 import {
     ArrProto
 } from './tool';
+import initCssConf from './css-config';
 
 //* ********定义全局变量 开始 *******************/
 var _initDate = new Date();
@@ -524,7 +525,6 @@ function _initJet (opt, calls) {
                 _this._tools._jets.push(_jet);
             } else {
                 item.__isRoot = true;
-                // debugger;
                 _addToJumpList(item, jumpList);
                 // if(item._JT_find)
                 // _throw('原数据没有'+attr+'属性');
@@ -1019,14 +1019,22 @@ var Jet = function (par, ele, opt) {
     opt.ele = (opt.ele) ? _getJdomEle(opt.ele) : document.body;
     if (!_isUd(opt.ele)) {
         opt.ele.__jet = this;
+        let html = '';
+        if (opt.style) {
+            html += `<style${opt.less === false ? ' jless="false' : ''}${opt.scoped !== true ? ' scoped="false"' : ''}>${opt.style}</style>`;
+        }
         if (opt.template) {
-            opt.ele._JT_html(opt.template);
+            html += opt.template;
+        }
+        if (html) {
+            opt.ele._JT_html(html);
         }
     } else {
         _info('忽略了一个组件，可能是由于操作过快，组件对应的dom已经被移除');
         return;
     }
-    if (!Jet._unnamedJets[__jet_root] && opt.ele.tagName == 'HTML') {
+    if (!Jet._unnamedJets[__jet_root] && !Jet.___root) {
+        Jet.___root = true;
         Jet._unnamedJets[__jet_root] = this;
         Jet.root = this;
     }
@@ -1045,6 +1053,9 @@ var Jet = function (par, ele, opt) {
             _throw('Jet name 属性等于' + opt.name + '已存在，请重新命名');
         }
         Jet.comp[opt.name] = this;
+    }
+    if (opt.style) {
+        _loadStyleCall(opt.ele, opt.name);
     }
     if (ele === __router_comp) {
         Jet._unnamedJets[__router_comp] = this;
@@ -1604,20 +1615,21 @@ function _checkJetTools (opt) {
 }
 
 
-var _jload = 'Jload', _jpath = 'Jpath', _par = 'Jpar';
+var _jload = 'JComp', _jpath = 'Jpath', _par = 'Jpar';
 function _initSingleLoad (_this, item, i, list, call) {
     var attr = item._JT_attr(_jload);
     var src = _getSrc(attr, 'html', item);
     item._JT_removeAttr(_jload + ' ' + _jpath);
-    
     if (Jet.load.__loadStore[src]) {
-        setTimeout(function () {
-            _dealLoadResult(Jet.load.__loadStore[src], item, _this, attr, i, list, call);
-        }, 0);// ????
+        // console.log(html);
+        // setTimeout(function () {
+        _dealLoadResult(Jet.load.__loadStore[src], item, _this, attr, i, list, call);
+        // }, 0);// ????
     } else {
         let name = src.replace('.html', '');
         if (_this._tools._components[name]) {
             let html = _parseComp(_this._tools._components[name]);
+            // console.log(html);
             Jet.load.__loadStore[src] = html;
             _dealLoadResult(html, item, _this, attr, i, list, call);
         } else {
@@ -1630,9 +1642,11 @@ function _initSingleLoad (_this, item, i, list, call) {
 }
 
 function _parseComp (json) {
+    if (typeof json === 'string') {
+        return json;
+    }
     return `<script>new Jet(${_jsonToString(json)})</script>`;
 }
-
 
 function _initLoading () {
     
@@ -1740,7 +1754,8 @@ function _getSrc (v, t, item) {
     if (_canUse('res')) {
         return Jet.res.getSrc(v, t);
     } else if (_canUse('router')) {
-        return Jet.router.conf[t] + _dealSrc(v);
+        return _checkTailFix(v, t);
+        // return Jet.router.conf[t] + _dealSrc(v);
     } else {
         return _checkTailFix(v, t);
     }
@@ -1840,23 +1855,26 @@ function _loadCompScript (out, attr, par) {
     }
 }
 
-function _loadCompStyle (out, attr) {
-    if (!_isUd(Jet.__css_conf) && _isUd(Jet.__css_conf.conf)) {
-        Jet.__css_conf._reloadCssConf(function () {
-            _loadStyleCall(out, attr);
-        });
-    } else {
-        if (!_isUd(Jet.__css_conf)) {
-            Jet.__css_conf.xhr = undefined;
-        }
-        _loadStyleCall(out, attr);
-    }
+function _loadCompStyle () {
+    // if (!_isUd(Jet.__css_conf) && _isUd(Jet.__css_conf.conf)) {
+    //     Jet.__css_conf._reloadCssConf(function () {
+    //         _loadStyleCall(out, attr);
+    //     });
+    // } else {
+    //     if (!_isUd(Jet.__css_conf)) {
+    //         Jet.__css_conf.xhr = undefined;
+    //     }
+    //     _loadStyleCall(out, attr);
+    // }
+    // if (Jet.__css_conf && Jet.__css_conf.conf) {
+    // _loadStyleCall(out, attr);
+    // }
 }
 // var _globalStyle = 'JglobalStyle';
-function _replaceCssVar (css, item) {
-    if (item && item._JT_attr('jless') !== 'false' && _canUse('less')) {
-        return _removeLine(css);
-    }
+function _replaceCssVar (css) {
+    // if (item && item._JT_attr('jless') !== 'false' && _canUse('less')) {
+    //     return _removeLine(css);
+    // }
     
     if (Jet.__css_conf) {
         return Jet.__css_conf._replaceCssVar(css);
@@ -1882,9 +1900,8 @@ function _loadStyleCall (out, attr, route) {
         // if (!isScope) gStyle._styles.push(attr);
         if (item._JT_hasAttr('src')) {
             _JT.load(_getSrc(item._JT_attr('src'), 'css', item), function (css) {
-                css = _less(css, item);
                 txt[i] = {
-                    css: _replaceCssVar(css, item),
+                    css: _less(_replaceCssVar(css, item)),
                     scoped: isScope
                 };
                 cssCount++;
@@ -1892,9 +1909,9 @@ function _loadStyleCall (out, attr, route) {
                 item._JT_remove();
             });
         } else {
-            var css = _less(item._JT_html(), item);
+            var css = item._JT_html();
             txt[i] = {
-                css: _replaceCssVar(css, item),
+                css: _less(_replaceCssVar(css, item)),
                 scoped: isScope
             };
             cssCount++;
@@ -1909,48 +1926,58 @@ function _loadStyleCall (out, attr, route) {
 
 var _scoped_style_id = '_scoped_style_id', _scoped_ele_id = 'scoped-ele-id', _scoped_id = 0;
 function _ctStyle (attr, out, route) {
-    var s = _JT.ct('style')._JT_attr({
-        'type': 'text/css',
-    });
-    if (route) {
-        var rstyle = _JT.attr('style-type=RouterOutStyle');
-        if (rstyle._JT_exist()) {
-            rstyle._JT_empty();
-            return rstyle;
-        }
-        out[_scoped_style_id] = 'RouterOut';
-        out._JT_attr(_scoped_ele_id, 'RouterOut');
-        s._JT_attr({
-            'style-type': 'RouterOutStyle',
-            '_scoped_style_id': out[_scoped_style_id],
-            'scope-src': attr,
+    let style = document.getElementById('__new_jetee_style');
+    var id = route ? 'RouterOut' : ('s' + (++_scoped_id));
+    out[_scoped_style_id] = id;
+    out._JT_attr(_scoped_ele_id, id);
+    if (!style) {
+        style = _JT.ct('style')._JT_attr({
+            'type': 'text/css',
+            'id': '__new_jetee_style'
         });
-    } else {
-        if (out._JT_attr('id') === __ROOT) {
-            out[_scoped_style_id] = 'Root';
-            out._JT_attr(_scoped_ele_id, 'Root');
-            var s = _JT.ct('style')._JT_attr({
-                'type': 'text/css',
-                'style-type': 'RootStyle'
-            });
-        } else {
-            if (_JT.attr('scope-src="' + attr + '"')._JT_exist()) {
-                return null;
-            } else {
-                if (!out[_scoped_style_id]) {
-                    var id = 's' + (++_scoped_id);
-                    out[_scoped_style_id] = id;
-                    out._JT_attr(_scoped_ele_id, id);
-                }
-                s._JT_attr({
-                    'style-type': 'CompStyle',
-                    'scope-src': attr,
-                    '_scoped_style_id': id
-                });
-            }
-        }
+        document.head.appendChild(style);
     }
-    return s;
+    
+    return style;
+    // if (route) {
+    //     var rstyle = _JT.attr('style-type=RouterOutStyle');
+    //     if (rstyle._JT_exist()) {
+    //         rstyle._JT_empty();
+    //         return rstyle;
+    //     }
+    //     out[_scoped_style_id] = 'RouterOut';
+    //     out._JT_attr(_scoped_ele_id, 'RouterOut');
+    //     s._JT_attr({
+    //         'style-type': 'RouterOutStyle',
+    //         '_scoped_style_id': out[_scoped_style_id],
+    //         'scope-src': attr,
+    //     });
+    // } else {
+    //     if (out._JT_attr('id') === __ROOT) {
+    //         out[_scoped_style_id] = 'Root';
+    //         out._JT_attr(_scoped_ele_id, 'Root');
+    //         var s = _JT.ct('style')._JT_attr({
+    //             'type': 'text/css',
+    //             'style-type': 'RootStyle'
+    //         });
+    //     } else {
+    //         if (_JT.attr('scope-src="' + attr + '"')._JT_exist()) {
+    //             return null;
+    //         } else {
+    //             if (!out[_scoped_style_id]) {
+    //                 var id = 's' + (++_scoped_id);
+    //                 out[_scoped_style_id] = id;
+    //                 out._JT_attr(_scoped_ele_id, id);
+    //             }
+    //             s._JT_attr({
+    //                 'style-type': 'CompStyle',
+    //                 'scope-src': attr,
+    //                 '_scoped_style_id': id
+    //             });
+    //         }
+    //     }
+    // }
+    // return s;
 }
 // 将组件css组合起来加入 head
 function _checkLoadStyles (out, cssCount, cssTotal, style, txt) {
@@ -1965,8 +1992,9 @@ function _checkLoadStyles (out, cssCount, cssTotal, style, txt) {
                     css += _removeBlanks(item.css);
                 }
             });
-            style._JT_html(css);
-            _JT.tag('head').append(style);
+            style._JT_html(css + style._JT_html());
+            // style._JT_html(css);
+            // _JT.tag('head').append(style);
         // out.append(style);
         }
     }
@@ -2022,9 +2050,10 @@ function _removeNote (css) {
 function _removeBlanks (css) {
     return css.replace(_mutli_blank, ' ');
 }
-function _less (str, item) {
-    if (Jet.config.less && _canUse('less') && (!item || item._JT_attr('jless') !== 'false'))
+function _less (str) {
+    if (Jet.config.less && _canUse('less')) {
         return Jet.less.toCss(str);
+    }
     return str;
 }
 function _babel (str, item) {
@@ -3627,10 +3656,13 @@ Jet.__base__ = {
     _less: _less,
     _addScopedCss: _addScopedCss,
     _funcs: {},
-    _funcs_id: 0
+    _funcs_id: 0,
+    _buildCompHtml: _parseComp,
 };
 window.JET = JET;
 window.Jet = Jet;
+
+initCssConf(Jet);
 
 export default Jet;
 
