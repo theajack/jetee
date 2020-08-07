@@ -1,6 +1,6 @@
 var base = '/docs', trueBase = true;
 if((window.location.host === "www.theajack.com" || window.location.host === "theajack.gitee.io") && window.location.pathname === '/jetee/'){
-    base = '/jetee/docs', trueBase = true;
+    base = '/jetee', trueBase = true;
 }
 console.log(base);
 Jet.router.use({
