@@ -281,22 +281,22 @@ Jet.define('Query',function(){
         url:'/attr/on',
         intro:'可以给html元素添加一个加载之后的回调函数',
     },{
-        name:'jload:组件',
-        url:'/attr/load',
+        name:'jcomp:组件',
+        url:'/attr/comp',
         intro:'可以在某个元素之内加载其他组件',
     },{
         name:'jonload',
-        url:'/attr/load',
-        intro:'jload加载完成的回调函数',
+        url:'/attr/comp',
+        intro:'jcomp加载完成的回调函数',
         des:'jonload'
     },{
         name:'父子组件通信',
-        url:'/attr/load',
+        url:'/attr/comp',
         intro:'介绍Jetee中父子组件通信方式',
         des:'par-child'
     },,{
         name:'Jpar',
-        url:'/attr/load',
+        url:'/attr/comp',
         intro:'设置子组件中Jetee元素的父元素',
         des:'jpar'
     },{

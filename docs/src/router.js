@@ -48,7 +48,7 @@ Jet.router.use({
                 '/style': '/attr/style',
                 '/run': '/attr/run',
                 '/on': '/attr/on',
-                '/load': '/attr/load',
+                '/comp': '/attr/comp',
                 '/root': '/attr/root',
                 '/dom': '/attr/dom',
                 '/html': '/attr/html',

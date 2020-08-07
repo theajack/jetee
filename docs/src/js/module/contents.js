@@ -1,14 +1,14 @@
 Jet.define('Content',function(){
     var contents=[
-        "介绍",'Jetee图解', "安装使用", "目录结构", "Jetee组件", "Jetee语法", "Jetee生命周期", "资源管理", "一个示例", "api目录",'更新日志', "关于", 
+        "介绍",'Jetee图解', "安装使用", "目录结构", "Jetee组件", "Jetee语法", "Jetee生命周期", "一个示例", "api目录",'更新日志', "关于", 
         "数据绑定", "绑定(属性J)", "$init", "绑定的分类", "绑定的语法", "数组方法", 
-        "修饰属性", "jif:条件判断", "jshow:选择展示", "jattr:绑定属性", "jstyle:绑定样式", "jrun:执行回调", "jon:绑定事件", "jload:组件", "jroot:根数据", "jdom:操作DOM", "jhtml:渲染HTML", 'jpath:路径机制',
-        "js库","官方库和第三方库","babel","less","use/use.all方法","定义库和依赖",
+        "修饰属性", "jif:条件判断", "jshow:选择展示", "jattr:绑定属性", "jstyle:绑定样式", "jrun:执行回调", "jon:绑定事件", "jcomp:组件", "jroot:根数据", "jdom:操作DOM", "jhtml:渲染HTML", 'jpath:路径机制',
+        "插件","官方插件", "Jet.use()",
         
         "表单验证", "jvalid", "jform", "Jet.valid 方法", "自定义样式", 
         "国际化语言", "use()", "静态", "动态", "Jet.lang.list", "Jet.lang.type", "Jet.lang.init", 
         "路由", "use()", "jrouter&jout", "路由事件", "route()",'Jet.router中的方法', "属性", 
-        "js模块规范", "define:定义", "export:输出", "import:引入", "module:集合", "get:获取", 
+        
         "css配置文件", "css变量与函数", "路由页面公共样式", 
         "工具方法", "$ajax", "$cookie", "$storage", "Jet.$", "prototype扩展", 
         "JUI", "基础样式类", "图标", "栅格", "按钮", "输入框", "单选框与单选框组", "复选框与复选框组", "下拉框", "切换按钮", "时间选择器", 
@@ -16,15 +16,15 @@ Jet.define('Content',function(){
         "在线使用"
     ]
     var urls=[
-        '/intro','/intro/img','/intro/install','/intro/contents','/intro/html','/intro/grammer','/intro/life','/intro/res','/intro/e','/intro/api','/intro/update','/intro/about',
+        '/intro','/intro/img','/intro/install','/intro/contents','/intro/html','/intro/grammer','/intro/life','/intro/e','/intro/api','/intro/update','/intro/about',
         '/bind','/bind/j','/bind/init','/bind/type','/bind/grammer','/bind/array',
-        '/attr','/attr/if','/attr/show','/attr/attr','/attr/style','/attr/run','/attr/on','/attr/load','/attr/root','/attr/dom','/attr/html','/attr/path',
-        '/lib','/lib/part','/lib/babel','/lib/less','/lib/use','/lib/define',
+        '/attr','/attr/if','/attr/show','/attr/attr','/attr/style','/attr/run','/attr/on','/attr/comp','/attr/root','/attr/dom','/attr/html','/attr/path',
+        '/lib','/lib/part','/lib/use',
 
         '/valid','/valid/valid','/valid/form','/valid/method','/valid/custom',
         '/lang','/lang/use','/lang/static','/lang/dynamic','/lang/list','/lang/type','/lang/init',
         '/router','/router/use','/router/ele','/router/on','/router/route','/router/func','/router/prop',
-        '/module','/module/define','/module/export','/module/import','/module/module','/module/get',
+        
         '/css','/css/var','/css/common',
         '/tool','/tool/ajax','/tool/cookie','/tool/storage','/tool/tool','/tool/prototype',
         '/jui','/jui/base','/jui/icon','/jui/grid','/jui/btn','/jui/input','/jui/radio','/jui/check','/jui/select','/jui/switch','/jui/date',
@@ -75,8 +75,8 @@ Jet.define('Content',function(){
             var index=urls.indexOf(url);
             return contents[index];
         },getContents:function(){
-            var s=['/intro/about','/bind/array','/attr/path','/lib/define','/valid/custom','/lang/init',
-                '/router/prop','/module/get','/css/common','/tool/prototype','/jui/tab','/code']
+            var s=['/intro/about','/bind/array','/attr/path','/lib/use','/valid/custom','/lang/init',
+                '/router/prop','/css/common','/tool/prototype','/jui/tab','/code']
             var data=[];
             s.forEach(function(item){
                 if(item=='/code'){
