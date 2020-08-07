@@ -1,30 +1,29 @@
 
-// import Jet from '../jetee/index';
+import Jet from '../jetee/index';
+import '../plugins/jui';
+import '../plugins/lang';
+import '../plugins/valid';
+import '../plugins/router';
+import '../plugins/less';
+import '../plugins/stat';
 
-// import '../plugins/jui';
-// import '../plugins/lang';
-// import '../plugins/valid';
-// import '../plugins/router';
-// import less from '../plugins/less';
-// import '../plugins/stat';
+// import Jet from '../../npm/jetee';
+// import '../../npm/jui';
+// import '../../npm/lang';
+// import '../../npm/valid';
+// import '../../npm/router';
+// import '../../npm/less';
+// import '../../npm/stat';
 
-import Jet from '../../npm/jetee';
-
-import '../../npm/jui';
-import '../../npm/lang';
-import '../../npm/valid';
-import '../../npm/router';
-import '../../npm/less';
-import '../../npm/stat';
-console.log(Jet);
-import html from './html.html';
+// console.log(Jet);
+// import html from './html.html';
 
 
-import comp from './comp';
-import btn from './btn';
-import lang from './lang';
-import valid from './valid';
-import select from './select';
+// import comp from './comp';
+// import btn from './btn';
+// import lang from './lang';
+// import valid from './valid';
+// import select from './select';
 import router from './router';
 // console.log(html);
 Jet.router.use(router);
@@ -62,25 +61,61 @@ Jet.style({
 // <div jload='lang'></div>
 // <div jload='valid'></div>
 {/* <div jload='select'></div> */}
+// Jet.app('#app', /* html*/`
+//     <style>
+//     .jetee{color: #b344c9;font-size: 40px;text-align: center;margin-top: 100px;}
+//     </style>
+//     <div class="jetee" j="message"></div>
+//     <script>
+//         new Jet({
+//             data: {
+//                 message: 'Hello Jetee!'
+//             }
+//         });
+//     </script>
+// `);
+Jet.create('#app', {
+    style: '.jetee{color: #b344c9;font-size: 40px;text-align: center;margin-top: 100px;}',
+    template: '<div class="jetee" j="message"></div>',
+    data: {
+        message: 'Hello Jetee!'
+    }
+});
 
+// new Jet({
+//     ele: '#app',
+//     style: /* css*/`
+//         .test-mes{
+//             color: ((themeColor));
+//             ((bg));
+//         }
+//     `,
+//     components: {
+//         comp, btn, lang, valid, select, html
+//     },
+//     template: /* html*/`
+//         <div j='message'></div>
+//         <div jcomp='comp' :aaa='message' @log-aha='logHello'></div>
+//     `,
+//     data: {
+//         message: 'Hello Jet',
+//         user: {
+//             name: 'theajack',
+//             age: 24
+//         }
+//     },
+//     func: {
+//         logHello () {
+//             console.log('hahaha');
+//         }
+//     }
+// });
 
-new Jet({
-    ele: '#app',
-    style: /* css*/`
-        .test-mes{
-            color: ((themeColor));
-            ((bg));
-        }
-    `,
-    components: {
-        comp, btn, lang, valid, select, html
-    },
-    template: /* html*/`
-        <div j='message' class='test-mes'></div><br>
+{/* <div j='message' class='test-mes'></div><br>
         <div j='user' class='test-mes'>
             <span j='age'></span>
         </div><br>
-        <div jcomp='comp'></div>
+        <div jcomp='comp':aaa='message'></div>
         <div jcomp='lang'></div>
         <div jcomp='html'></div>
         <div>
@@ -88,15 +123,4 @@ new Jet({
             <span jrouter='/b'>b</span>
             <span jrouter='/b/bb'>bb</span>
         </div>
-        <div jout></div>
-    `,
-    data: {
-        message: 'Hello Jet',
-        user: {
-            name: 'theajack',
-            age: 24
-        }
-    },
-    func: {
-    }
-});
+        <div jout></div> */}

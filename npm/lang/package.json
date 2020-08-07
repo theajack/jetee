@@ -1,6 +1,6 @@
 {
     "name": "jetee-lang",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Web轻量级的渐进式MVVM框架jetee 国际化插件",
     "main": "index.js",
     "scripts": {},

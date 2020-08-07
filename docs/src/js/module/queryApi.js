@@ -1,16 +1,16 @@
 Jet.define('Query',function(){
     var map=[{
-        name:'Jet简介',
+        name:'Jetee简介',
         url:'/intro',
-        intro:'Jet是一个前端的轻量级的js框架，不依赖任何第三方库。Jet采用数据双向绑定，以数据驱动视图。',
+        intro:'Jetee是一个前端的轻量级的js框架，不依赖任何第三方库。Jetee采用数据双向绑定，以数据驱动视图。',
     },{
-        name:'Jet图解',
+        name:'Jetee图解',
         url:'/intro/img',
-        intro:'图解Jet，了解其如何工作以及能做些什么',
+        intro:'图解Jetee，了解其如何工作以及能做些什么',
     },{
-        name:'Jet生命周期图解',
+        name:'Jetee生命周期图解',
         url:'/intro/img',
-        intro:'图解Jet生命周期，了解生命周期流程',
+        intro:'图解Jetee生命周期，了解生命周期流程',
         des:'life'
     },{
         name:'安装使用',
@@ -19,7 +19,7 @@ Jet.define('Query',function(){
     },{
         name:'目录结构',
         url:'/intro/contents',
-        intro:'介绍Jet项目的目录结构。'
+        intro:'介绍Jetee项目的目录结构。'
     },{
         name:'config.js',
         url:'/intro/contents',
@@ -31,9 +31,9 @@ Jet.define('Query',function(){
         intro:'介绍build.config.json文件',
         des:'build.config'
     },{
-        name:'Jet组件',
+        name:'Jetee组件',
         url:'/intro/html',
-        intro:'Jet的Jet组件使用的html后缀的文件，语法与普通的html一样。',
+        intro:'Jetee的Jetee组件使用的html后缀的文件，语法与普通的html一样。',
         des:''
     },{
         name:'图片',
@@ -46,9 +46,9 @@ Jet.define('Query',function(){
         intro:'css样式是否只在当前页面中生效',
         des:'scoped'
     },{
-        name:'Jet语法',
+        name:'Jetee语法',
         url:'/intro/grammer',
-        intro:'Jet 使用 new Jet() 来创建一个Jet组件',
+        intro:'Jetee 使用 new Jet() 来创建一个Jet组件',
     },{
         name:'data和func',
         url:'/intro/grammer',
@@ -62,7 +62,7 @@ Jet.define('Query',function(){
     },{
         name:'局部渲染',
         url:'/intro/grammer',
-        intro:'根据Jet数据局部渲染html元素',
+        intro:'根据Jetee数据局部渲染html元素',
         des:'part'
     },{
         name:'name参数',
@@ -72,7 +72,7 @@ Jet.define('Query',function(){
     },{
         name:'Jet.root:根组件',
         url:'/intro/grammer',
-        intro:'root.js 或 root.html 中声明的组件是Jet应用的根组件',
+        intro:'root.js 或 root.html 中声明的组件是Jetee应用的根组件',
         des:'root'
     },{
         name:'par参数',
@@ -82,16 +82,16 @@ Jet.define('Query',function(){
     },{
         name:'static参数',
         url:'/intro/grammer',
-        intro:'给Jet元素设置静态数据$data',
+        intro:'给Jetee元素设置静态数据$data',
         des:'static'
     },{
-        name:'Jet生命周期',
+        name:'Jetee生命周期',
         url:'/intro/life',
-        intro:'Jet 有9个生命周期函数',
+        intro:'Jetee 有9个生命周期函数',
     },{
         name:'ondatachange',
         url:'/intro/life',
-        intro:'为Jet数据添加一个数据变化的监听事件',
+        intro:'为Jetee数据添加一个数据变化的监听事件',
         des:'ondatachange'
     },{
         name:'beforeinitawait',
@@ -122,16 +122,16 @@ Jet.define('Query',function(){
     },{
         name:'数据绑定',
         url:'/bind',
-        intro:'Jet中的UI是由数据驱动，所有动态的html内容都与Jet的数据绑定，当数据改变时，对应的UI内容会自动更新',
+        intro:'Jetee中的UI是由数据驱动，所有动态的html内容都与Jetee的数据绑定，当数据改变时，对应的UI内容会自动更新',
     },{
         name:'绑定(属性J)',
         url:'/bind/j',
-        intro:'Jet中使用属性J将Jet中的数据和UI绑定',
+        intro:'Jetee中使用属性J将Jetee中的数据和UI绑定',
         des:''
     },{
         name:'$init',
         url:'/bind/init',
-        intro:'初始化动态添加的Jet元素',
+        intro:'初始化动态添加的Jetee元素',
     },{
         name:'绑定的分类',
         url:'/bind/type',
@@ -188,9 +188,9 @@ Jet.define('Query',function(){
         intro:'对原生的数组方法进行了重写，使支持双向数据绑定。',
         des:'o-array'
     },{
-        name:'Jet数组方法',
+        name:'Jetee数组方法',
         url:'/bind/array',
-        intro:'循环类型的for元素的绑定值是一个数组，Jet 对for元素的数组定义了一些操作方法，来代替原生js的数组操作方法。',
+        intro:'循环类型的for元素的绑定值是一个数组，Jetee 对for元素的数组定义了一些操作方法，来代替原生js的数组操作方法。',
         des:'jet-array'
     },{
         name:'$push方法',
@@ -245,7 +245,7 @@ Jet.define('Query',function(){
     },{
         name:'修饰属性',
         url:'/attr',
-        intro:'本章中将介绍Jet中的属性，样式和事件的绑定',
+        intro:'本章中将介绍Jetee中的属性，样式和事件的绑定',
     },{
         name:'$.$par()',
         url:'/attr',
@@ -292,26 +292,26 @@ Jet.define('Query',function(){
     },{
         name:'父子组件通信',
         url:'/attr/load',
-        intro:'介绍Jet中父子组件通信方式',
+        intro:'介绍Jetee中父子组件通信方式',
         des:'par-child'
     },,{
         name:'Jpar',
         url:'/attr/load',
-        intro:'设置子组件中Jet元素的父元素',
+        intro:'设置子组件中Jetee元素的父元素',
         des:'jpar'
     },{
         name:'jroot:根数据',
         url:'/attr/root',
-        intro:'可以将html元素绑定到Jet根元素上',
+        intro:'可以将html元素绑定到Jetee根元素上',
     },{
         name:'$r',
         url:'/attr/root',
-        intro:'使用 $r 来调用Jet数据',
+        intro:'使用 $r 来调用Jetee数据',
         des:'r'
     },{
         name:'jdom:操作DOM',
         url:'/attr/dom',
-        intro:'生成一个可以使用Jet特殊语法操作的类dom元素',
+        intro:'生成一个可以使用Jetee特殊语法操作的类dom元素',
     },{
         name:'jhtml:渲染HTML',
         url:'/attr/html',
@@ -357,7 +357,7 @@ Jet.define('Query',function(){
     },{
         name:'表单验证',
         url:'/valid',
-        intro:'Jet中的自带一套表单验证的方案',
+        intro:'Jetee中的自带一套表单验证的方案',
     },{
         name:'Jvalid',
         url:'/valid/valid',
@@ -365,7 +365,7 @@ Jet.define('Query',function(){
     },{
         name:'预定义的验证规则',
         url:'/valid/valid',
-        intro:'Jet中预定义的验证规则有以下几种',
+        intro:'Jetee中预定义的验证规则有以下几种',
         des:'regExp'
     },{
         name:'Jform',
@@ -534,7 +534,7 @@ Jet.define('Query',function(){
     },{
         name:'Jet.prototype.$import',
         url:'/module/import',
-        intro:'在Jet元素中引入模块',
+        intro:'在Jetee元素中引入模块',
         des:'Jet.prototype.$import'
     },{
         name:'模块别名',
@@ -614,11 +614,11 @@ Jet.define('Query',function(){
     },{
         name:'JUI',
         url:'/jui/',
-        intro:'JUI 是针对 Jet 开发的一套前端 UI 框架',
+        intro:'JUI 是针对 Jetee 开发的一套前端 UI 框架',
     },{
         name:'jui-bind',
         url:'/jui/',
-        intro:'与Jet数据进行绑定',
+        intro:'与Jetee数据进行绑定',
         des:'jui-bind'
     },{
         name:'jui-change',
@@ -643,7 +643,7 @@ Jet.define('Query',function(){
     },{
         name:'jui工具方法',
         url:'/jui/',
-        intro:'扩展了Jet工具方法',
+        intro:'扩展了Jetee工具方法',
         des:'jui-tool'
     },{
         name:'基础样式类',
@@ -738,7 +738,7 @@ Jet.define('Query',function(){
     },{
         name:'在线使用',
         url:'/code',
-        intro:'在线使用和调试Jet',
+        intro:'在线使用和调试Jetee',
     }]
     Jet.export({
         search:function(s){

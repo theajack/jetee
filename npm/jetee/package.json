@@ -1,6 +1,6 @@
 {
     "name": "jetee",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Web轻量级的渐进式MVVM框架",
     "main": "index.js",
     "scripts": {},

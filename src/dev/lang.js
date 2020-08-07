@@ -1,5 +1,5 @@
-// import Jet from '../jetee/index';
-import Jet from '../../npm/jetee';
+import Jet from '../jetee/index';
+// import Jet from '../../npm/jetee';
 // const hello = 'Hello world!';
 console.log(Jet.lang);
 export default {

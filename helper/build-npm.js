@@ -3,6 +3,7 @@ const fs = require('fs');
 const toc = require('gulp-markdown-toc');
 let version = require('../package.json').version;
 let files = [
+    '../npm/jetee/package.json',
     '../npm/jui/package.json',
     '../npm/lang/package.json',
     '../npm/less/package.json',

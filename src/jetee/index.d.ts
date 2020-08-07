@@ -96,6 +96,8 @@ export default class Jet {
     $ajax: Function;
     $cookie: Function;
 
+    static create(html: string): void;
+    static create(ele: string | HTMLElement, html: string): void;
     static $: jetTool;
     static _unnamedJets: object;
     static comp: object;

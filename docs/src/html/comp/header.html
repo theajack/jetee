@@ -180,13 +180,13 @@
                 var ei = si + this.queryString.length;
                 return s.substring(0, si) + '<span class="__red">' + s.substring(si, ei) + '</span>' + s.substring(ei);
             }, toGithub: function () {
-                $J.open("https://github.com/theajack/jet")
+                $J.open("https://github.com/theajack/jetee")
             }, toHome:function(){
-                $J.open("https://www.theajack.com")
+                $J.open("https://github.com/theajack")
             }, toTop: function () {
                 $J.id('rootApp').scrollTo(0)
             },toMesBoard:function(){
-                $J.open("https://github.com/theajack/jet/issues/new")
+                $J.open("https://github.com/theajack/jetee/issues/new")
             }
         }
     })

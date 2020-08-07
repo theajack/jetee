@@ -1,6 +1,6 @@
 {
     "name": "jetee-less",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Web轻量级的渐进式MVVM框架jetee less运行时实时转译插件",
     "main": "index.js",
     "scripts": {},

@@ -8,18 +8,112 @@ Jetee是一个前端的轻量级的渐进式 MVVM框架，不依赖任何第三�
 
 ----
 
-## [文档](https://theajack.gitee.io/jet/) | [jetee-cli](https://github.com/theajack/jet-js-cli)
+## [文档](https://theajack.gitee.io/jet/) | [jetee-cli](https://github.com/theajack/jetee-cli)
 
-### 介绍
+### 0. 快速入门
 
-Jetee 是一款轻量级、渐进式的MVVM框架 [Jetee](https://theajack.gitee.io/jet)，详细使用和安装教程请[点击这里](https://theajack.gitee.io/jet)
+#### 0.1 cdn 使用
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta charset="UTF-8"></head>
+    <body>
+        <div id="app"></div>
+        <script src="https://cdn.jsdelivr.net/npm/jetee/jetee.min.js"></script>
+        <script>
+            new Jet({
+                ele: '#app',
+                style: '.jetee{color: #b344c9;font-size: 40px;text-align: center;margin-top: 100px;}',
+                template: '<div class="jetee" j="message">$ + "!"</div>',
+                data: {
+                    message: 'Hello Jetee!'
+                }
+            });
+        </script>
+    </body>
+</html>
+```
+
+#### 0.2 npm 使用
+
+安装
+
+```
+npm i jetee
+```
+
+##### 0.2.1 new Jet 创建一个Jetee应用
+
+```js
+import Jet from 'jetee';
+
+new Jet({
+    ele: '#app',
+    // 如果使用 vscode 开发推荐使用 es6-string-css 和 es6-string-html 插件
+    style: /*css*/`.jetee{color: #b344c9;font-size: 40px;text-align: center;margin-top: 100px;}`,
+    template: /*html*/`<div class="jetee" j="message">$ + "!"</div>`,
+    data: {
+        message: 'Hello Jetee!'
+    }
+});
+```
+
+##### 0.2.2 Jet.create + html-loader 创建一个Jetee应用
+
+该种方式需要安装 html-loader 并配合 webpack使用
+
+html 文件: app.html
+
+```html
+<style>
+    .jetee{color: #b344c9;font-size: 40px;text-align: center;margin-top: 100px;}
+</style>
+<div class="jetee" j="message">$ + "!"</div>
+<script>
+    new Jet({
+        data: {
+            message: 'Hello Jetee!'
+        }
+    });
+</script>
+```
+
+```js
+import Jet from 'jetee';
+import app from './app.html';
+
+Jet.create(app);
+// 或者指定一个容器 Jet.create("#app", app);
+```
+
+##### 0.2.3 Jet.create + json 创建一个Jet应用
+
+```js
+import Jet from 'jetee';
+
+Jet.create({
+    // 如果使用 vscode 开发推荐使用 es6-string-css 和 es6-string-html 插件
+    style: /*css*/`.jetee{color: #b344c9;font-size: 40px;text-align: center;margin-top: 100px;}`,
+    template: /*html*/`<div class="jetee" j="message">$ + "!"</div>`,
+    data: {
+        message: 'Hello Jetee!'
+    }
+});
+// 或者指定一个容器 Jet.create("#app", {});
+```
+
+
+### 1. 介绍
+
+Jetee 是一款轻量级、渐进式的MVVM框架 [Jetee](https://github.com/theajack/jetee)，详细使用和安装教程请[点击这里](https://theajack.gitee.io/jetee)
 Jetee不依赖任何第三方库，采用数据双向绑定，以数据驱动视图。
 
 Jetee可以在非服务器环境中开发。 Jetee可以通过引入script标签的方式局部使用，从而可以与您已有的项目完美结合，实现渐进式的Web开发。
 
-您也可以通过 [jetee-cli](https://www.npmjs.com/package/jet-js-cli) 建立项目 或是 手动下载 <a href="https://theajack.gitee.io/jet/jet-template.zip" download='jet-template.zip' class='link'>Jetee模板</a> 来在服务器环境中开发。
+您也可以通过 [jetee-cli](https://www.npmjs.com/package/jetee-cli) 建立项目 或是 手动下载 <a href="https://github.com/theajack/jetee-template" class='link'>Jetee模板</a> 来在服务器环境中开发。
 
-### 图解
+### 2. 图解
 
 在使用和学习Jetee之前，先通过一张图了解一下Jetee是如何工作，以及Jetee能做些什么。
 
@@ -39,10 +133,12 @@ Jetee组件包含的特性和Jetee元素包含的修饰属性，为Jetee应用�
 
 ![Jetee 生命周期](https://theajack.gitee.io/jet/src/image/Jet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.jpg)
 
-### 一个基本的Jetee实例
+### 3. 一个简单的Jetee实例
 
 以下是一个简单的Jetee组件
-[点击这里](https://theajack.gitee.io/jet/#/code) 可以在线使用这个例子
+
+[点击这里](https://theajack.gitee.io/jetee/#/code) 可以在线使用这个例子
+
 ```html
 <div j='message'></div><br>
 <div j='user'>
@@ -64,4 +160,14 @@ Jetee组件包含的特性和Jetee元素包含的修饰属性，为Jetee应用�
     })
 </script>
 ```
-[点击这里](https://theajack.gitee.io/jet/#/code) 可以在线使用这个例子
+
+### 4. 插件
+
+Jetee 目前支持以下几个插件：
+
+1. [jetee-router](https://www.npmjs.com/package/jetee-router) : 路由插件
+2. [jetee-valid](https://www.npmjs.com/package/jetee-valid) : 表单验证插件
+3. [jetee-lang](https://www.npmjs.com/package/jetee-lang) : 国际化语言插件
+4. [jetee-jui](https://www.npmjs.com/package/jetee-jui) : 契合Jetee的ui库
+5. [jetee-less](https://www.npmjs.com/package/jetee-less) : 运行时less编译插件
+6. [jetee-stat](https://www.npmjs.com/package/jetee-stat) : 开发打印性能插件

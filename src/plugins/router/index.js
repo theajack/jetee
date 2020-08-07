@@ -243,6 +243,10 @@ let router = {
                 // Jet.router.__xhr = _JT.load(C._getSrc(file, 'html'), function (html) {
                 Jet.router.__xhr = null;
                 var out = Jet.router._initRouterOut()._JT_html(html);
+                if (out && out.length === 0) {
+                    console.warn('未找到路由出口，路由被取消');
+                    return;
+                }
                 // Jet.router.clearScoped();
                 if ('undefined' != typeof JUI) {
                     window.JUI._jui_mounted = [];

@@ -1114,6 +1114,24 @@ var Jet = function (par, ele, opt) {
 var JET = function (par, ele, opt) {
     return new Jet(par, ele, opt);
 };
+Jet.create = function (ele, html) {
+    if (typeof html === 'undefined') {
+        html = ele;
+        ele = _JT.ct('div');
+        document.body._JT_prepend(ele);
+    }
+    if (typeof ele === 'string') {
+        ele = document.querySelector(ele);
+    }
+    if (!ele instanceof HTMLElement) {
+        console.warn('Jet.app: 请传入正确的 ele');
+        return;
+    }
+    if (typeof html === 'object') {
+        html = _parseComp(html);
+    }
+    _dealLoadResult(html, ele, null, 'root', 0, [0]);
+};
 Jet.prototype = _createEmpty();
 Jet.prototype.$getData = function () {
     return this;
@@ -1687,7 +1705,7 @@ function _dealLoadResult (html, item, _this, attr, i, list, call) {
     var n = list.length;
     item._JT_html(html);
     var par = item._JT_attr(_par);
-    if (par === null && _this.$DOM && _this._tools.name !== undefined) {
+    if (par === null && _this !== null && _this.$DOM && _this._tools.name !== undefined) {
         par = _this._tools.name;
     }
     _loadCompStyle(item, attr);

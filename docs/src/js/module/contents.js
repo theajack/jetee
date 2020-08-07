@@ -1,6 +1,6 @@
 Jet.define('Content',function(){
     var contents=[
-        "介绍",'Jet图解', "安装使用", "目录结构", "Jet组件", "Jet语法", "Jet生命周期", "资源管理", "一个示例", "api目录",'更新日志', "关于", 
+        "介绍",'Jetee图解', "安装使用", "目录结构", "Jetee组件", "Jetee语法", "Jetee生命周期", "资源管理", "一个示例", "api目录",'更新日志', "关于", 
         "数据绑定", "绑定(属性J)", "$init", "绑定的分类", "绑定的语法", "数组方法", 
         "修饰属性", "jif:条件判断", "jshow:选择展示", "jattr:绑定属性", "jstyle:绑定样式", "jrun:执行回调", "jon:绑定事件", "jload:组件", "jroot:根数据", "jdom:操作DOM", "jhtml:渲染HTML", 'jpath:路径机制',
         "js库","官方库和第三方库","babel","less","use/use.all方法","定义库和依赖",
