@@ -44,7 +44,6 @@
             if (opt.router[k] == '') opt.router[k] = k;
             _checkRouterName(k, opt.router[k]);
         }
-        debugger
     }
     function _checkRouterName(k, name) {
         if (k === Jet.router.index) {

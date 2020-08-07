@@ -1,12 +1,22 @@
 
-import Jet from '../jetee/index';
+// import Jet from '../jetee/index';
 
-import '../plugins/jui';
-import '../plugins/lang';
-import '../plugins/valid';
-import '../plugins/router';
-import '../plugins/less';
-import '../plugins/render-time';
+// import '../plugins/jui';
+// import '../plugins/lang';
+// import '../plugins/valid';
+// import '../plugins/router';
+// import less from '../plugins/less';
+// import '../plugins/stat';
+
+import Jet from '../../npm/jetee';
+
+import '../../npm/jui';
+import '../../npm/lang';
+import '../../npm/valid';
+import '../../npm/router';
+import '../../npm/less';
+import '../../npm/stat';
+console.log(Jet);
 import html from './html.html';
 
 
@@ -16,7 +26,7 @@ import lang from './lang';
 import valid from './valid';
 import select from './select';
 import router from './router';
-console.log(html);
+// console.log(html);
 Jet.router.use(router);
 
 Jet.style({
@@ -24,7 +34,7 @@ Jet.style({
         themeColor: '#f44',
         bg: 'background-color:#4f4',
         // 如使用vscode开发 推荐安装 es6-string-html和 es6-string-css插件
-        commonClass: /* css*/` 
+        commonClass: /* css*/`
             .common-class{
                 font-weight:bold;
                 color:#88f;

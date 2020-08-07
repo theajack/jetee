@@ -7,6 +7,7 @@ import {
     ArrProto
 } from './tool';
 import initCssConf from './css-config';
+import version from './version';
 
 //* ********定义全局变量 开始 *******************/
 var _initDate = new Date();
@@ -3659,6 +3660,7 @@ Jet.__base__ = {
     _funcs_id: 0,
     _buildCompHtml: _parseComp,
 };
+Jet.version = version;
 window.JET = JET;
 window.Jet = Jet;
 

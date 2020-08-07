@@ -11,13 +11,13 @@ document.head._JT_append(_JT.ct('style')._JT_attr({
     'type': 'text/css',
     'id': '__preload_jl'
 })._JT_html('[Jlang]{visibility:hidden}'));
-Jet.lang = function (opt) {
+let lang = function (opt) {
     this.type = _lang;
     this.data = opt;
 };
-Jet.lang.list = ['cn', 'en']; // 默认支持中英文
-Jet.lang.used = true;
-Jet.lang.use = function (list) {
+lang.list = ['cn', 'en']; // 默认支持中英文
+lang.used = true;
+lang.use = function (list) {
     if (_JT.type(list) != 'array') {
         C._throw('Jet.lang.init: 参数是一个数组');
     } else {
@@ -25,10 +25,10 @@ Jet.lang.use = function (list) {
         this.list = list;
         _jl_name = list[0];
     }
-    Jet.lang.init();
+    lang.init();
 };
-Jet.lang.jets = [];
-Jet.lang.init = function (obj) {
+lang.jets = [];
+lang.init = function (obj) {
     var list;
     if (obj == undefined) {
         list = _JT.attr(_lang);
@@ -42,7 +42,7 @@ Jet.lang.init = function (obj) {
                 var attr = _item._JT_attr(_name);
                 item._jet_langs[attr] = _item._JT_html();
             });
-            item._JT_html(item._jet_langs[Jet.lang.type]);
+            item._JT_html(item._jet_langs[lang.type]);
             if (C._canUse('valid'))Jet.valid.init(item);
         }
     });
@@ -50,30 +50,35 @@ Jet.lang.init = function (obj) {
         item._JT_remove();
     });
 };
-Object.defineProperty(Jet.lang, 'type', {
+Object.defineProperty(lang, 'type', {
     configurable: true,
     enumerable: true,
     get: function () {
         return _jl_name;
     },
     set: function (val) {
-        if (val !== _jl_name && Jet.lang.list.indexOf(val) !== -1) {
+        if (val !== _jl_name && lang.list.indexOf(val) !== -1) {
             _jl_name = val;
             _refreshLang();
         }
     }
 });
 function _refreshLang () {
-    if (Jet.lang.used) {
+    if (lang.used) {
         _JT.attr(_lang)._JT_each(function (item) {// 静态文字
-            item._JT_html(item._jet_langs[Jet.lang.type]);
+            item._JT_html(item._jet_langs[lang.type]);
             if (C._canUse('valid'))Jet.valid.init(item);
         });
-        Jet.lang.jets._JT_each(function (item) {// 绑定文字
+        lang.jets._JT_each(function (item) {// 绑定文字
             item.refresh();
         });
     }
 }
+
 window.JL = function (opt) {
-    return new Jet.lang(opt);
+    return new lang(opt);
 };
+
+window.Jet.lang = lang;
+
+export default lang;

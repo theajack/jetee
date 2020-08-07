@@ -1,0 +1,28 @@
+{
+    "name": "jetee-jui",
+    "version": "1.0.0",
+    "description": "Web轻量级的渐进式MVVM框架jetee ui插件",
+    "main": "index.js",
+    "scripts": {},
+    "unpkg": "jetee.min.js",
+    "jsdelivr": "jetee.min.js",
+    "typings": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/theajack/jetee.git"
+    },
+    "keywords": [
+        "MVVM框架",
+        "类vue",
+        "web框架",
+        "jetee",
+        "js库",
+        "theajack"
+    ],
+    "author": "theajack",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/theajack/jetee/issues"
+    },
+    "homepage": "https://www.theajack.com/jetee/"
+}

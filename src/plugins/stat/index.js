@@ -1,7 +1,7 @@
 var Jet = window.Jet;
 var C = Jet.__base__;
 Jet.__base__._useList.push('render-time');
-Jet.RenderTime = {
+window.Jet.RenderTime = {
     rootDate: null,
     date: null,
     time: 0,

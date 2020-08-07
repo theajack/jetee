@@ -58,7 +58,7 @@ function _checkRouterName (k, route) {
 function _addIntoRouter (k, component) {
     Jet.router.map[Jet.router.base + k] = component;
 }
-Jet.router = {
+let router = {
     base: '',
     trueBase: false,
     history: false,
@@ -474,3 +474,7 @@ function _loadStyle (out) {
     // }
     C._loadStyleCall(out, Jet.router.path, true);
 }
+
+window.Jet.router = router;
+
+export default router;

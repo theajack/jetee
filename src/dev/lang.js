@@ -1,6 +1,7 @@
-import Jet from '../jetee/index';
+// import Jet from '../jetee/index';
+import Jet from '../../npm/jetee';
 // const hello = 'Hello world!';
-
+console.log(Jet.lang);
 export default {
     name: 'lang',
     template: /* html*/`

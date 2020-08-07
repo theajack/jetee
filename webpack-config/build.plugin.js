@@ -1,32 +1,17 @@
 
-// let version = require('../package.json').version;
 let path = require('path');
 
-// module.exports = (env) => {
-//     let plugin = env.pluginname;
-//     return {
-//         entry: path.resolve('./', 'src/plugin/' + plugin + '/index.js'),
-//         output: {
-//             path: path.resolve('./', 'dist'),
-//             filename: 'cnchar.' + plugin + '.' + version + '.min.js'
-//         },
-//         module: {
-//             rules: [{
-//                 test: /(.js)$/,
-//                 use: [{
-//                     loader: 'babel-loader',
-//                 }]
-//             }]
-//         }
-//     };
-// };
+
 module.exports = (env) => {
     let plugin = env.pluginname;
     return {
-        entry: path.resolve('./', 'src/plugin/' + plugin + '/index.js'),
+        entry: path.resolve('./', 'src/plugins/' + plugin + '/index.js'),
         output: {
             path: path.resolve('./', 'npm/' + plugin),
-            filename: 'cnchar.' + plugin + '.min.js'
+            filename: 'jetee.' + plugin + '.min.js',
+            library: 'J' + plugin,
+            libraryTarget: 'umd',
+            libraryExport: 'default',
         },
         module: {
             rules: [{
@@ -34,6 +19,12 @@ module.exports = (env) => {
                 use: [{
                     loader: 'babel-loader',
                 }]
+            }, {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            }, {
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader'],
             }]
         }
     };

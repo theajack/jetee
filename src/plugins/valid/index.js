@@ -5,7 +5,7 @@ var C = Jet.__base__;
 Jet.__base__._useList.push('valid');
 var _JT = C._JT;
 var _form = 'Jform', _valid = 'Jvalid', _onOnePass = null, _onOneFail = null;
-Jet.valid = {
+let valid = {
     init: function (b) {
         var c;
         b = C._getJdomEle(b);
@@ -23,12 +23,12 @@ Jet.valid = {
                 a._JT_on({
                     'blur': 'Jet.valid.validInput(this,true,true)',
                     'input': function () {
-                        if (Jet.valid.useOnInput)
-                            Jet.valid.validInput(this, true, true);
+                        if (valid.useOnInput)
+                            valid.validInput(this, true, true);
                     },
                     'focus': 'Jet.valid.addValidValue(this)'
                 }, true).__valided = true;
-                if (Jet.valid.__placeholder) {
+                if (valid.__placeholder) {
                     a._JT_attr('placeholder', _getValueText(a._JT_attr(_valid)));
                 }
             }
@@ -92,13 +92,13 @@ Jet.valid = {
     addValidText: function (a, b) {
         if (_JT.type(a) == 'json' && b == undefined) {
             for (var c in a) {
-                Jet.valid.addValidText(c, a[c]);
+                valid.addValidText(c, a[c]);
             }
         } else {
-            if (Jet.valid.__lang == 'CHINESE') {
-                Jet.valid.validText.CN[a] = b;
+            if (valid.__lang == 'CHINESE') {
+                valid.validText.CN[a] = b;
             } else {
-                Jet.valid.validText.EN[a] = b;
+                valid.validText.EN[a] = b;
             }
         }
     },
@@ -106,9 +106,9 @@ Jet.valid = {
         if (typeof reg === 'string') {
             reg = new RegExp(reg);
         }
-        Jet.valid.regExp[name] = reg;
+        valid.regExp[name] = reg;
         if (text !== undefined) {
-            Jet.valid.addValidText(name, text);
+            valid.addValidText(name, text);
         }
     },
     validInput: _validInput,
@@ -136,7 +136,7 @@ Jet.valid = {
     addValid: function (obj, type) {
         obj = C._getJdomEle(obj);
         obj._JT_attr(_valid, type);
-        Jet.valid.init(obj);
+        valid.init(obj);
     },
     onOnePass: function (c) {
         _onOnePass = C._checkFunction(c);
@@ -154,28 +154,28 @@ function _resetValid (obj) {
         obj._JT_removeClass('jet-unpass')._JT_val(obj._JT_validValue);
     }
 }
-Object.defineProperties(Jet.valid, {
+Object.defineProperties(valid, {
     'language': {
-        get: function () { return Jet.valid.__lang; },
+        get: function () { return valid.__lang; },
         set: function (val) {
-            Jet.valid.__lang = val.toUpperCase();
+            valid.__lang = val.toUpperCase();
         }
     }, 'useJUI': {
-        get: function () { return Jet.valid.__useJUI; },
+        get: function () { return valid.__useJUI; },
         set: function (val) {
             if (typeof JUI !== 'undefined') {
-                Jet.valid.__useJUI = val;
+                valid.__useJUI = val;
             }
         }
     }, 'useDefaultStyle': {
-        get: function () { return Jet.valid.__default; },
+        get: function () { return valid.__default; },
         set: function (val) {
-            if (Jet.valid.__default !== val) {
-                if (Jet.valid.__useOnInput === true && val === true) {
+            if (valid.__default !== val) {
+                if (valid.__useOnInput === true && val === true) {
                     C._warn('useOnInput 模式下不可使用默认样式');
                 } else {
-                    Jet.valid.__default = val;
-                    Jet.valid.__lastUseDef = val;
+                    valid.__default = val;
+                    valid.__lastUseDef = val;
                     if (val === false) {
                         _JT.cls('jet-unpass')._JT_each(function (a) {
                             _checkIsPw(a);
@@ -187,26 +187,26 @@ Object.defineProperties(Jet.valid, {
             }
         }
     }, 'useOnInput': {
-        get: function () { return Jet.valid.__useOnInput; },
+        get: function () { return valid.__useOnInput; },
         set: function (val) {
-            if (Jet.valid.__useOnInput !== val) {
-                Jet.valid.__useOnInput = val;
+            if (valid.__useOnInput !== val) {
+                valid.__useOnInput = val;
                 if (val === false) {
-                    if (Jet.valid.__default !== Jet.valid.__lastUseDef) {
-                        Jet.valid.useDefaultStyle = Jet.valid.__lastUseDef;
+                    if (valid.__default !== valid.__lastUseDef) {
+                        valid.useDefaultStyle = valid.__lastUseDef;
                     }
                 } else {
-                    if (Jet.valid.useDefaultStyle) {
-                        Jet.valid.useDefaultStyle = false;
-                        Jet.valid.__lastUseDef = true;
+                    if (valid.useDefaultStyle) {
+                        valid.useDefaultStyle = false;
+                        valid.__lastUseDef = true;
                     }
                 }
             }
         }
     }, 'showInPlaceHolder': {
-        get: function () { return Jet.valid.__placeholder; },
+        get: function () { return valid.__placeholder; },
         set: function (val) {
-            Jet.valid.__placeholder = val;
+            valid.__placeholder = val;
             if (val === true) {
                 _JT.attr(_valid)._JT_each(function (a) {
                     a._JT_attr('placeholder', _getValueText(a._JT_attr(_valid)));
@@ -219,7 +219,7 @@ Object.defineProperties(Jet.valid, {
         }
     }
 });
-Jet.valid.init();
+valid.init();
 function _checkIsPw (a) {
     if (a._JT_ispw === true) {
         a._JT_attr('type', 'password');
@@ -256,7 +256,7 @@ function _validInput (b, a, isFromBlur) {
             c = _checkValue(v, b._JT_content());
         }
         if (c == 'true') {
-            if (Jet.valid.__default) {
+            if (valid.__default) {
                 b._JT_removeClass('jet-unpass');
                 b._JT_validValue = undefined;
                 _checkIsPw(b);
@@ -264,7 +264,7 @@ function _validInput (b, a, isFromBlur) {
             if (_onOnePass != undefined) _onOnePass(b);
         } else {
             if (_onOneFail != undefined) _onOneFail(b, c);
-            if (Jet.valid.__default) {
+            if (valid.__default) {
                 if (isFromBlur === true)
                     b._JT_validValue = b._JT_content();
                 b._JT_content(c)._JT_addClass('jet-unpass');
@@ -274,9 +274,9 @@ function _validInput (b, a, isFromBlur) {
                 }
             }
             if (a !== false) {
-                if (Jet.valid.useJUI) {
+                if (valid.useJUI) {
                     window.JUI.msg.error(c);
-                } else if (Jet.valid.useAlert) {
+                } else if (valid.useAlert) {
                     alert(c);
                 }
             }
@@ -335,10 +335,10 @@ function _validateForm (opt) {
         if (b) {
             C._checkFunction(opt.fail)(e, g);
         }
-        var i = (Jet.valid.__lang == 'CHINESE') ? '输入有误，请按提示改正。' : 'Values is not expected';
-        if (Jet.valid.useAlert) {
+        var i = (valid.__lang == 'CHINESE') ? '输入有误，请按提示改正。' : 'Values is not expected';
+        if (valid.useAlert) {
             alert(i);
-        } else if (Jet.valid.useJUI) {
+        } else if (valid.useJUI) {
             window.JUI.msg.error(i);
         }
     } else {
@@ -371,37 +371,37 @@ function _getValueText (b) {
     }
 };
 function _getValidText (a, b) {
-    if (Jet.valid.__lang == 'CHINESE') {
+    if (valid.__lang == 'CHINESE') {
         if (b == undefined) {
             if (a._JT_has('express')) {
-                return Jet.valid.validText.CN.express;
+                return valid.validText.CN.express;
             }
-            return Jet.valid.validText.CN[a];
+            return valid.validText.CN[a];
         } else {
             var c = '';
             if (a._JT_has('number')) {
                 c = ' 且长度为';
             }
             if (b[0] == b[1]) {
-                return Jet.valid.validText.CN[a] + c + b[0];
+                return valid.validText.CN[a] + c + b[0];
             }
-            return Jet.valid.validText.CN[a] + c + '[' + b[0] + ',' + b[1] + ']';
+            return valid.validText.CN[a] + c + '[' + b[0] + ',' + b[1] + ']';
         }
     } else {
         if (b == undefined) {
             if (a._JT_has('express')) {
-                return Jet.valid.validText.EN.express;
+                return valid.validText.EN.express;
             }
-            return Jet.valid.validText.EN[a];
+            return valid.validText.EN[a];
         } else {
             var c = '';
             if (a._JT_has('number')) {
                 c = ' and length between';
             }
             if (b[0] == b[1]) {
-                return Jet.valid.validText.EN[a] + c + b[0];
+                return valid.validText.EN[a] + c + b[0];
             }
-            return Jet.valid.validText.EN[a] + c + '[' + b[0] + ',' + b[1] + ']';
+            return valid.validText.EN[a] + c + '[' + b[0] + ',' + b[1] + ']';
         }
     }
 };
@@ -436,8 +436,8 @@ function _getRegExp (f) {
         d = f.substring(8, f.length - 1);
         f = 'express';
     }
-    if (f in Jet.valid.regExp) {
-        return Jet.valid.regExp[f];
+    if (f in valid.regExp) {
+        return valid.regExp[f];
     }
     switch (f) {
         case 'number':
@@ -495,3 +495,7 @@ function _testRange (b, c) {
     }
     return 'true';
 };
+
+window.Jet.valid = valid;
+
+export default valid;

@@ -2,6 +2,7 @@
 import lang from './lang';
 import valid from './valid';
 import select from './select';
+import '../plugins/lang';
 
 var base = '', trueBase = false;
 if ((window.location.host === 'www.theajack.com' || window.location.host === 'theajack.gitee.io') && window.location.pathname === '/jet/') {

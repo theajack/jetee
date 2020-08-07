@@ -1,25 +1,35 @@
 {
-    "name": "aaa",
-    "version": "0.0.1",
-    "description": "Ebuild project",
+    "name": "jetee",
+    "version": "1.0.0",
+    "description": "Web轻量级的渐进式MVVM框架",
     "scripts": {
-        "build": "webpack --config webpack-config/build.js --env.mode=script",
-        "build:lang": "webpack --config webpack-config/build.js --env.mode=npm",
-        "publish": "npm publish npm",
+        "build": "npm run build:main && npm run build:plugin && npm run build:npm",
+        "build:main": "webpack --config webpack-config/build.js",
+        "build:jui": "webpack --config webpack-config/build.plugin.js --env.pluginname=jui",
+        "build:lang": "webpack --config webpack-config/build.plugin.js --env.pluginname=lang",
+        "build:less": "node ./helper/copy-less.js",
+        "build:router": "webpack --config webpack-config/build.plugin.js --env.pluginname=router",
+        "build:stat": "webpack --config webpack-config/build.plugin.js --env.pluginname=stat",
+        "build:valid": "webpack --config webpack-config/build.plugin.js --env.pluginname=valid",
+        "build:plugin": "npm run build:jui && npm run build:lang && npm run build:less && npm run build:router && npm run build:stat && npm run build:valid",
+        "build:npm": "node ./helper/build-npm.js",
+        "publish": "npm publish npm/jetee && npm publish npm/jui && npm publish npm/lang && npm publish npm/less && npm publish npm/router && npm publish npm/stat && npm publish npm/valid",
         "dev": "webpack-dev-server --open --config webpack-config/dev.js",
-        "lint": "eslint src --ext js",
-        "copy-latest": "node ./helper/copy-latest.js",
-        "modify-version": "node ./helper/modify-version.js",
-        "copy-npm": "node ./helper/copy-npm.js",
-        "render-tpl": "node ./template/execute.js"
+        "start": "webpack-dev-server --open --config webpack-config/dev.js",
+        "lint": "eslint src --ext js"
     },
     "author": "theajack",
     "repository": {
         "type": "git",
-        "url": "https://github.com/theajack/ebuild-cli"
+        "url": "git+https://github.com/theajack/jetee.git"
     },
     "keywords": [
-        "ebuild-cli"
+        "MVVM框架",
+        "类vue",
+        "web框架",
+        "jetee",
+        "js库",
+        "theajack"
     ],
     "license": "MIT",
     "devDependencies": {
@@ -42,6 +52,7 @@
         "eslint-plugin-promise": "^4.2.1",
         "gulp": "^4.0.2",
         "gulp-babel": "^8.0.0",
+        "gulp-markdown-toc": "^1.1.0",
         "gulp-rename": "^2.0.0",
         "html-loader": "^1.1.0",
         "html-webpack-plugin": "^4.0.3",

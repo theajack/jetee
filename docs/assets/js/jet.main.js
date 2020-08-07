@@ -4464,9 +4464,12 @@
   function _loadSingleLib(name,index) {
     var src = name;
     if (_libList.indexOf(name) !== -1) {
-      src = 'assets/js/jet-lib/' + name + '.js';
+      src = Jet.config.base + 'assets/js/jet-lib/' + name + '.js';
     }else if(_defineLibs[name]){
       src=_defineLibs[name];
+      if(src.indexOf('http')!==0){
+        src = Jet.config.base + src;
+      }
     }
     var script=_JT.ct('script')._JT_attr({
       'src': src
@@ -4535,7 +4538,8 @@
   Jet.config={
     babel:true,
     less:true,
-    env:'dev'
+    env:'dev',
+    base: '',
   }
   Jet.use.all = function () {
     var args = ArrProto.splice.call(arguments, 0);

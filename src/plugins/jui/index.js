@@ -4190,4 +4190,6 @@ $J.ready(function () {
 
 window.JUI = JUI;
 
+window.Jet.JUI = JUI;
+
 export default JUI;
