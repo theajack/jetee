@@ -16,9 +16,9 @@ import '../plugins/stat';
 // import '../../npm/stat';
 
 // console.log(Jet);
-// import html from './html.html';
+import html from './html.html';
 
-
+window.aa = html.template;
 // import comp from './comp';
 // import btn from './btn';
 // import lang from './lang';
@@ -27,6 +27,7 @@ import '../plugins/stat';
 import router from './router';
 // console.log(html);
 Jet.router.use(router);
+console.log(html);
 
 Jet.style({
     variable: {
@@ -75,8 +76,9 @@ Jet.style({
 //     </script>
 // `);
 Jet.create('#app', {
+    components: {html},
     style: '.jetee{color: #b344c9;font-size: 40px;text-align: center;margin-top: 100px;}',
-    template: '<div class="jetee" j="message"></div>',
+    template: '<div class="jetee" j="message"></div><div jcomp="html"></div>',
     data: {
         message: 'Hello Jetee!'
     }

@@ -9,8 +9,10 @@
     <div j='age'>($<18)?'未成年':'成年人'</div>
 </div>
 <script>
+    import Jet from '../jetee/index.js';
+    console.log('JetJetJet', Jet);
     var a = 'xxx';
-    new Jet({
+    export default {
         data: {
             test () {
                 return a + '11';
@@ -23,5 +25,5 @@
                 });
             }
         }
-    });
+    };
 </script>

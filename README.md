@@ -22,7 +22,7 @@ Jetee是一个前端的轻量级的渐进式 MVVM框架，不依赖任何第三�
 
 ----
 
-## [文档](https://theajack.gitee.io/jet/) | [jetee-cli](https://github.com/theajack/jetee-cli)
+## [文档](https://theajack.gitee.io/jetee/) | [jetee-cli](https://github.com/theajack/jetee-cli)
 
 ### 0. 快速入门
 

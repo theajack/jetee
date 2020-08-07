@@ -42,9 +42,13 @@ module.exports = {
             options: {
                 limit: 50000,
             },
+        // }, {
+        //     test: /\.html$/,
+        //     loader: 'html-loader',
         }, {
             test: /\.html$/,
-            loader: 'html-loader',
+            loader: path.resolve('./', 'npm/jetee-loader/index.js'),
+            exclude: /node_modules/
         }]
     }
 };

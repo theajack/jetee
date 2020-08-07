@@ -1,0 +1,15 @@
+{
+  "name": "jetee-loader",
+  "version": "1.0.0",
+  "description": "jetee webpack loader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "theajack",
+  "license": "MIT",
+  "devDependencies": {
+    "node-html-parser": "^1.2.20",
+    "recast": "^0.19.1"
+  }
+}
