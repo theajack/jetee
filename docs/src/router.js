@@ -1,4 +1,4 @@
-var base = '/docs', trueBase = true;
+var base = '', trueBase = true;
 if((window.location.host === "www.theajack.com" || window.location.host === "theajack.gitee.io") && window.location.pathname === '/jetee/'){
     base = '/jetee', trueBase = true;
 }

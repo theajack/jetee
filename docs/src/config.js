@@ -32,7 +32,7 @@ Jet.use.define({
     }
 });
 
-Jet.config.base = 'docs/'
+// Jet.config.base = 'docs/'
 
 // //声明库之后，就可以通过 库名来使用库
 // Jet.use('a',function(){

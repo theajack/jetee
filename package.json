@@ -16,7 +16,8 @@
         "publish": "npm publish npm/jetee && npm publish npm/jui && npm publish npm/lang && npm publish npm/less && npm publish npm/router && npm publish npm/stat && npm publish npm/valid",
         "dev": "webpack-dev-server --open --config webpack-config/dev.js",
         "start": "webpack-dev-server --open --config webpack-config/dev.js",
-        "lint": "eslint src --ext js"
+        "lint": "eslint src --ext js",
+        "dev:docs": "lite-server --baseDir=\"docs\""
     },
     "author": "theajack",
     "repository": {
@@ -60,6 +61,7 @@
         "less": "^3.11.1",
         "less-loader": "^5.0.0",
         "lint-staged": "^9.4.2",
+        "lite-server": "^2.5.4",
         "mini-css-extract-plugin": "^0.9.0",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
         "style-loader": "^1.1.3",
