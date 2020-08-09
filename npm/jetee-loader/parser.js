@@ -28,14 +28,14 @@ function parseHTML(html){
             }else if(node.tagName === 'script'){
                 script += content;
             }else{
-                template += content;
+                template += node.outerHTML;
             }
         }else if(node.nodeType === 3){
             template += node.text;
         }
     }
-    template = template.replace(/\n/g, '\\');
-    style = style.replace(/\n/g, '\\');
+    template = template.replace(/\r\n/g, '\n');
+    style = style.replace(/\r\n/g, '\n');
     return {template, style, script};
 }
 

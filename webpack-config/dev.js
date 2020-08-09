@@ -47,7 +47,7 @@ module.exports = {
         //     loader: 'html-loader',
         }, {
             test: /\.html$/,
-            loader: path.resolve('./', 'npm/jetee-loader/index.js'),
+            use: ['babel-loader', path.resolve('./', 'npm/jetee-loader/index.js')],
             exclude: /node_modules/
         }]
     }

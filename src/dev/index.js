@@ -16,9 +16,9 @@ import '../plugins/stat';
 // import '../../npm/stat';
 
 // console.log(Jet);
-import html from './html.html';
-
-window.aa = html.template;
+import html from './html.js';
+console.log(html);
+// window.aa = html.template;
 // import comp from './comp';
 // import btn from './btn';
 // import lang from './lang';
@@ -27,7 +27,7 @@ window.aa = html.template;
 import router from './router';
 // console.log(html);
 Jet.router.use(router);
-console.log(html);
+// console.log(html);
 
 Jet.style({
     variable: {
@@ -75,12 +75,31 @@ Jet.style({
 //         });
 //     </script>
 // `);
-Jet.create('#app', {
+new Jet({
+    ele: '#app',
     components: {html},
     style: '.jetee{color: #b344c9;font-size: 40px;text-align: center;margin-top: 100px;}',
-    template: '<div class="jetee" j="message"></div><div jcomp="html"></div>',
+    template: `
+    <div jcomp="html" ::user='user'></div>
+    <div class="jetee" j="message"></div>
+    <div j='user'>
+        <div j=name>'姓名:'+$</div>
+        <div>年龄:<input j='age' type='text' class='j-input' jon='input:logAge'/></div>
+        <div j='age'>($<18)?'未成年':'成年人'</div>
+    </div>`,
     data: {
-        message: 'Hello Jetee!'
+        message: 'Hello Jetee!',
+        user: {
+            name: 'theajack',
+            age: 24
+        }
+    },
+    func: {
+        logAge () {
+            this.$nextTick(() => {
+                console.log(this.user.age, this.test);
+            });
+        }
     }
 });
 

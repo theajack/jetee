@@ -1781,7 +1781,7 @@ function _getSrc (v, t, item) {
 }
 function _checkTailFix (v, t) {
     if (t == 'js' || t == 'css' || t == 'html') {
-        if (v.substring(v.lastIndexOf('.') + 1) !== t) {
+        if (v.indexOf('.') === -1 || v.substring(v.lastIndexOf('.') + 1) !== t) {
             return v + '.' + t;
         }
     }
