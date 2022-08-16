@@ -1,5 +1,6 @@
 var base = '', trueBase = true;
-if((window.location.host === "www.theajack.com" || window.location.host === "theajack.gitee.io") && window.location.pathname === '/jetee/'){
+var hosts = ['theajack.github.io', 'theajack.gitee.io', 'www.shiyix.cn', 'shiyix.cn'];
+if(hosts.indexOf(window.location.host) !== -1 && window.location.pathname === '/jetee/'){
     base = '/jetee', trueBase = true;
 }
 console.log(base);
